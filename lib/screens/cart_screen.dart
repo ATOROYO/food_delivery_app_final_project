@@ -5,6 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class CartScreen extends StatelessWidget {
+  const CartScreen({super.key});
+
   Future<void> placeOrder(BuildContext context) async {
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     final user = FirebaseAuth.instance.currentUser;

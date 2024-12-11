@@ -5,6 +5,8 @@ class AdminPanel extends StatelessWidget {
   final CollectionReference foodItemsRef =
       FirebaseFirestore.instance.collection('food_items');
 
+  const AdminPanel({super.key});
+
   void addFoodItem(BuildContext context) async {
     await foodItemsRef.add({
       'name': 'New Item',
@@ -28,10 +30,12 @@ class AdminPanel extends StatelessWidget {
       body: StreamBuilder<QuerySnapshot>(
         stream: foodItemsRef.snapshots(),
         builder: (context, snapshot) {
-          if (snapshot.hasError)
+          if (snapshot.hasError) {
             return Center(child: Text('Error loading items'));
-          if (!snapshot.hasData)
+          }
+          if (!snapshot.hasData) {
             return Center(child: CircularProgressIndicator());
+          }
 
           final items = snapshot.data!.docs;
 
